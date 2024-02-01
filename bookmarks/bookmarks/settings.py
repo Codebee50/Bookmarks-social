@@ -11,6 +11,10 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -143,17 +147,17 @@ AUTHENTICATION_BACKENDS =[
 ]
 
 #facebook auth
-SOCIAL_AUTH_FACEBOOK_KEY = '368435022474468'
-SOCIAL_AUTH_FACEBOOK_SECRET = '6c691aa9ea7a8434739775622c02c30a'
+SOCIAL_AUTH_FACEBOOK_KEY = os.environ.get('SOCIAL_AUTH_FACEBOOK_KEY')
+SOCIAL_AUTH_FACEBOOK_SECRET = os.environ.get('SOCIAL_AUTH_FACEBOOK_SECRET')
 SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
 
 #twitter auth
-SOCIAL_AUTH_TWITTER_KEY ='L9F6YtvcLzniGDBxY8idpvUW3'
-SOCIAL_AUTH_TWITTER_SECRET = 'P7PoPfnlilcczETDQUpfvifaoIUDd6CLj9Z6dtY0teWuaVwTSE'
+SOCIAL_AUTH_TWITTER_KEY = os.environ.get('SOCIAL_AUTH_TWITTER_KEY')
+SOCIAL_AUTH_TWITTER_SECRET = os.environ.get('SOCIAL_AUTH_TWITTER_SECRET')
 
 #google auth
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '680311018796-k2d25tdfn9v6nc3h2gqbrdbnp1bvu65n.apps.googleusercontent.com'
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = os.environ.get('SOCIAL_AUTH_GOOGLE_OAUTH2_KEY')
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = os.environ.get('SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET')
 
 
 SOCIAL_AUTH_PIPELINE = [
