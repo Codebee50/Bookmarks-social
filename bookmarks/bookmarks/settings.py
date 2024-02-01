@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-25h1sl#1c#s4#utin9girrw=w+m7_+9t*j80cf7zc-5b#1s+^!
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['codebee.com', 'localhost', '127.0.0.1']
 
 
 # Application definition
@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'social_django',
+    'django_extensions'
 ]
 
 MIDDLEWARE = [
@@ -134,7 +136,34 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 AUTHENTICATION_BACKENDS =[
     'django.contrib.auth.backends.ModelBackend', 
-    'account.authentication.EmailAuthBackend'
+    'account.authentication.EmailAuthBackend',
+    'social_core.backends.facebook.FacebookOAuth2',
+    'social_core.backends.twitter.TwitterOAuth',
+    'social_core.backends.google.GoogleOAuth2'
 ]
 
+#facebook auth
+SOCIAL_AUTH_FACEBOOK_KEY = '368435022474468'
+SOCIAL_AUTH_FACEBOOK_SECRET = '6c691aa9ea7a8434739775622c02c30a'
+SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
 
+#twitter auth
+SOCIAL_AUTH_TWITTER_KEY ='L9F6YtvcLzniGDBxY8idpvUW3'
+SOCIAL_AUTH_TWITTER_SECRET = 'P7PoPfnlilcczETDQUpfvifaoIUDd6CLj9Z6dtY0teWuaVwTSE'
+
+#google auth
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '680311018796-k2d25tdfn9v6nc3h2gqbrdbnp1bvu65n.apps.googleusercontent.com'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'
+
+
+SOCIAL_AUTH_PIPELINE = [
+ 'social_core.pipeline.social_auth.social_details',
+ 'social_core.pipeline.social_auth.social_uid',
+ 'social_core.pipeline.social_auth.auth_allowed',
+ 'social_core.pipeline.social_auth.social_user',
+ 'social_core.pipeline.user.get_username',
+ 'social_core.pipeline.user.create_user',
+ 'social_core.pipeline.social_auth.associate_user',
+ 'social_core.pipeline.social_auth.load_extra_data',
+ 'social_core.pipeline.user.user_details',
+]
