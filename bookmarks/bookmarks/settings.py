@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 from pathlib import Path
 from dotenv import load_dotenv
 import os
+from django.urls import reverse_lazy
 
 load_dotenv()
 
@@ -44,7 +45,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'social_django',
     'django_extensions',
-    'images.apps.ImagesConfig'
+    'images.apps.ImagesConfig',
+    'easy_thumbnails'
 ]
 
 MIDDLEWARE = [
@@ -124,6 +126,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = BASE_DIR / 'static'
+
 
 MEDIA_URL = 'media/'#base url used to server media files
 MEDIA_ROOT = BASE_DIR / 'media'#local path where media files reside
@@ -173,3 +177,7 @@ SOCIAL_AUTH_PIPELINE = [
  'social_core.pipeline.social_auth.load_extra_data',
  'social_core.pipeline.user.user_details',
 ]
+
+ABSOLUTE_URL_OVERRIDES = {
+    'auth.user': lambda u: reverse_lazy('user_detail', args=[u.username])
+}

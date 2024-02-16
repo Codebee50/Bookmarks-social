@@ -26,6 +26,8 @@ class ImageCreateForm(forms.ModelForm):
     
         if commit:
             image.save()
+        
+        return image
 
     """
     he rsplit method splits the string from the right
